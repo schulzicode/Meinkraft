@@ -13,7 +13,7 @@ import de.meinkraft.Meinkraft;
 public class Main {
 	
 	public static void main(String[] args) {
-		Display.create(1280, 720, "Meinkraft git");
+		Display.create(1280, 720, "Meinkraft");
 		ALContext alc = ALContext.create();
 //		alDistanceModel
 		
