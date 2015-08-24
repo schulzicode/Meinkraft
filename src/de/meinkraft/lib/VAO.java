@@ -37,7 +37,7 @@ public class VAO {
 	/**
 	 * @param values - "SIZE STRIDE OFFSET"
 	 */
-	public void initVAO(String[] attributes) {
+	public void initVAO(String...attributes) {
 		glBindVertexArray(vaoID);
 		glBindBuffer(GL_ARRAY_BUFFER, vboID);
 		

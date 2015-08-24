@@ -3,3 +3,7 @@
 /native/
 /docs/
 .classpath
+*.log
+*.png
+*.vs
+*.fs

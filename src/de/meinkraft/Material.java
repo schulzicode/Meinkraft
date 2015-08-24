@@ -2,7 +2,9 @@ package de.meinkraft;
 
 public class Material {
 	
-	public static final Material AIR = new Material().setOpaque(false);
+	public static final Material AIR = new Material();
+	public static final Material STONE = new Material().setOpaque(true);
+	public static final Material GROUND = new Material().setOpaque(true);
 	
 	private boolean opaque;
 	
