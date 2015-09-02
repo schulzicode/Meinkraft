@@ -7,7 +7,10 @@ public class WorldGeneratorFlat extends WorldGenerator {
 		for(int x = 0; x < Chunk.SIZE_X; x++)
 			for(int y = 0; y < Chunk.SIZE_Y; y++)
 				for(int z = 0; z < Chunk.SIZE_Z; z++) {
-					chunk.setBlockAt(x, y, z, Block.DIRT);
+					if(y > 63)
+						chunk.setBlockAt(x, y, z, Block.AIR);
+					else
+						chunk.setBlockAt(x, y, z, Block.DIRT);
 				}
 	}
 	

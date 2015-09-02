@@ -1,18 +1,19 @@
 package de.meinkraft;
 
-import static org.lwjgl.glfw.GLFW.GLFW_KEY_G;
 import static org.lwjgl.opengl.GL11.GL_LINEAR;
 import static org.lwjgl.opengl.GL11.GL_NEAREST;
+import static org.lwjgl.opengl.GL11.glViewport;
 import static org.lwjgl.opengl.GL12.GL_CLAMP_TO_EDGE;
 
 import java.io.IOException;
+import java.util.Locale;
 
 import de.meinkraft.lib.Camera;
 import de.meinkraft.lib.Display;
-import de.meinkraft.lib.Input;
 import de.meinkraft.lib.Matrix4;
 import de.meinkraft.lib.Shader;
 import de.meinkraft.lib.Texture;
+import de.meinkraft.lib.Time;
 import de.meinkraft.lib.Transform;
 import de.meinkraft.lib.Utils;
 
@@ -22,8 +23,7 @@ public class Meinkraft {
 	private int textures;
 	private Shader shader;
 	
-	private Chunk chunk;
-	private ChunkLoader chunkLoader;
+	private World world;
 	
 	public Meinkraft() {
 		camera = new Camera(new Matrix4().initPerspective(70f, (float) Display.getWidth() / (float) Display.getHeight(), 0.01f, 1000f));
@@ -46,28 +46,29 @@ public class Meinkraft {
 			e.printStackTrace();
 		}
 		
-		chunk = new Chunk(0, 0);
-		chunkLoader = new ChunkLoader();
+		world = new World("World");
 	}
 	
 	public void input() {
 		camera.input();
-		
-		if(Input.getKeyDown(GLFW_KEY_G))
-			chunkLoader.addChunk(chunk);
 	}
 	
 	public void update() {
+		// temp
+		world.update((int) Math.floor(-camera.getTransform().getTranslation().getX() / Chunk.SIZE_X), (int) Math.floor(-camera.getTransform().getTranslation().getZ() / Chunk.SIZE_Z));
 		
+		Display.setTitle("FPS " + String.format(Locale.ENGLISH, "%.2f", 1.0f / Time.getDelta()));
+		if(Display.wasResized()) {
+			camera.getProjectionMatrix().initPerspective(70f, (float) Display.getWidth() / (float) Display.getHeight(), 0.01f, 1000f);
+			glViewport(0, 0, Display.getWidth(), Display.getHeight());
+		}
 	}
 	
 	public void render() {
 		shader.bind();
 		shader.setUniform("v", camera.getViewMatrix());
 		Texture.bindTexture2DArray(textures);
-		
-		chunk.render();
-		
+		world.render();
 		Shader.unbind();
 	}
 	

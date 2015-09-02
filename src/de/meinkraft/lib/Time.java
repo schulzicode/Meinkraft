@@ -16,4 +16,8 @@ public class Time {
 		return delta;
 	}
 	
+	public static double getTime() {
+		return glfwGetTime();
+	}
+	
 }
