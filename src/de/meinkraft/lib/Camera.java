@@ -6,6 +6,7 @@ import static org.lwjgl.glfw.GLFW.GLFW_KEY_A;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_D;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_E;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_ESCAPE;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_LEFT_SHIFT;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_Q;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_S;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_W;
@@ -13,7 +14,7 @@ import static org.lwjgl.glfw.GLFW.GLFW_MOUSE_BUTTON_1;
 
 public class Camera implements InputController {
 	
-	public static final float MOV_SPEED = 30;
+	public static final float MOV_SPEED = 5;
 	public static final float ROT_SPEED = 0.1f;
 	
 	private boolean lockMov, lockRot;
@@ -36,6 +37,10 @@ public class Camera implements InputController {
 				if(!lockMov) {
 					Vector3 forward = new Vector3(getViewMatrix().get(2, 0), getViewMatrix().get(2, 1), getViewMatrix().get(2, 2));
 					Vector3 sideward = new Vector3(getViewMatrix().get(0, 0), getViewMatrix().get(0, 1), getViewMatrix().get(0, 2));
+					
+					float MOV_SPEED = Camera.MOV_SPEED;
+					if(Input.getKey(GLFW_KEY_LEFT_SHIFT))
+						MOV_SPEED *= 5;
 					
 					if(Input.getKey(GLFW_KEY_W))
 						transform.setTranslation(transform.getTranslation().add(forward.mul(MOV_SPEED * Time.getDelta())));

@@ -28,7 +28,7 @@ public class Utils {
 		return Class.class.getResourceAsStream(path);
 	}
 	
-	public static FloatBuffer createFloatBuffer(float[] data) {
+	public static FloatBuffer createFlippedFloatBuffer(float[] data) {
 		FloatBuffer buffer = BufferUtils.createFloatBuffer(data.length);
 		buffer.put(data);
 		buffer.flip();
@@ -36,7 +36,7 @@ public class Utils {
 		return buffer;
 	}
 	
-	public static IntBuffer createIntBuffer(int[] data) {
+	public static IntBuffer createFlippedIntBuffer(int[] data) {
 		IntBuffer buffer = BufferUtils.createIntBuffer(data.length);
 		buffer.put(data);
 		buffer.flip();

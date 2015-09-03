@@ -15,9 +15,9 @@ public class Chunk {
 	private VAO vao;
 	public FloatBuffer vertices;
 	public IntBuffer indices;
-	public int solidBlocks;
+	private int solidBlocks;
 	
-	private boolean doLoad;
+	private boolean load;
 	
 	private final int x, z;
 	
@@ -29,7 +29,7 @@ public class Chunk {
 	}
 	
 	public void update() {
-		if(doLoad)
+		if(load)
 			load();
 	}
 	
@@ -49,7 +49,7 @@ public class Chunk {
 		solidBlocks = indices.limit();
 		vertices = null;
 		indices = null;
-		doLoad = false;
+		load = false;
 	}
 	
 	public void unload() {
@@ -80,7 +80,7 @@ public class Chunk {
 	}
 	
 	public void doLoad() {
-		doLoad = true;
+		load = true;
 	}
 
 	public int getX() {

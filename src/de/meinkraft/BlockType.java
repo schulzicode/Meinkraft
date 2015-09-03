@@ -6,6 +6,7 @@ public abstract class BlockType {
 	
 	public static final BlockType AIR = new BlockTypeAir(false);
 	public static final BlockType CUBE = new BlockTypeCube(true);
+	public static final BlockType PLANT = new BlockTypePlant(false);
 	
 	private final boolean solid;
 	

@@ -8,9 +8,12 @@ public class ChunkLoader extends Thread {
 
 	private ArrayDeque<Chunk> queue;
 	
-	public ChunkLoader() {
-		queue = new ArrayDeque<Chunk>();
+	private final ChunkManager chunkManager;
+	
+	public ChunkLoader(ChunkManager chunkManager) {
+		this.chunkManager = chunkManager;
 		
+		queue = new ArrayDeque<Chunk>();
 		start();
 	}
 	
@@ -78,7 +81,7 @@ public class ChunkLoader extends Thread {
 								if(chunk.getBlockAt(x, y, z - 1).getType().isSolid() && chunk.getBlockAt(x, y, z - 1).getMaterial().isOpaque())
 									bc.north = true;
 								
-								chunk.getBlockAt(x, y, z).getType().addVertices(chunk.getX() * Chunk.SIZE_X + x, y, chunk.getZ() * Chunk.SIZE_Z + z, chunk.vertices, bc, 1,1,1,1,1,1);
+								chunk.getBlockAt(x, y, z).getType().addVertices(chunk.getX() * Chunk.SIZE_X + x, y, chunk.getZ() * Chunk.SIZE_Z + z, chunk.vertices, bc, chunk.getBlockAt(x, y, z).getTextures());
 							}
 					chunk.vertices.flip();
 					
@@ -108,5 +111,5 @@ public class ChunkLoader extends Thread {
 			}
 		}
 	}
-
+	
 }

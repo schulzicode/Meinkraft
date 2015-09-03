@@ -5,6 +5,7 @@ public class Material {
 	public static final Material AIR = new Material();
 	public static final Material STONE = new Material().setOpaque(true);
 	public static final Material GROUND = new Material().setOpaque(true);
+	public static final Material PLANT = new Material().setOpaque(false);
 	
 	private boolean opaque;
 	

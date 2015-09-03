@@ -3,7 +3,7 @@ package de.meinkraft;
 public class ChunkManager {
 
 	// the squared radius in which chunks get generated
-	public static final byte RADIUS = 4;
+	public static final byte RADIUS = 6;
 	
 	private Chunk[][] chunks;
 	
@@ -12,7 +12,7 @@ public class ChunkManager {
 	
 	public ChunkManager(World world) {
 		this.world = world;
-		chunkLoader = new ChunkLoader();
+		chunkLoader = new ChunkLoader(this);
 		
 		chunks = new Chunk[2 * RADIUS + 1][2 * RADIUS + 1];
 	}
@@ -21,6 +21,7 @@ public class ChunkManager {
 		for(int x = 0; x < chunks.length; x++)
 			for(int z = 0; z < chunks.length; z++) {
 				Chunk chunk = chunks[x][z];
+				
 				if(chunk == null) {
 					cs:for(int lx = -RADIUS; lx <= RADIUS; lx++)
 						for(int lz = -RADIUS; lz <= RADIUS; lz++) {
@@ -97,7 +98,7 @@ public class ChunkManager {
 				
 				if(chunks[xx][zz].getX() == chunkX && chunks[xx][zz].getZ() == chunkZ) {
 					chunks[xx][zz].setBlockAt(x - chunkX * Chunk.SIZE_X, y, z - chunkZ * Chunk.SIZE_Z, block);
-					chunkLoader.addChunk(chunks[xx][zz]);
+					// make the chunk rebuild in the next update
 				}
 			}
 	}

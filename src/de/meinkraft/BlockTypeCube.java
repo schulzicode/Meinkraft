@@ -38,7 +38,7 @@ public class BlockTypeCube extends BlockType {
 	@Override
 	public void addVertices(float x, float y, float z, FloatBuffer buffer, Blockcheck check, int...textures) {
 		if(textures.length != 6)
-			throw new OpenGLException("BlockTypeCube must have 6 textures");
+			throw new OpenGLException(getClass().getSimpleName() + " must have 6 textures");
 		
 		if(!check.north)
 			buffer.put(new float[] {
