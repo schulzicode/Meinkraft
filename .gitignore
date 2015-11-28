@@ -5,5 +5,5 @@
 .classpath
 *.log
 *.png
-*.vs
-*.fs
+*.fnt
+*.db

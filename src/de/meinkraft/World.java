@@ -1,19 +1,25 @@
 package de.meinkraft;
 
+import de.meinkraft.lib.Time;
+
 public class World {
 
 	private final ChunkManager chunkManager;
+	private final Player player;
 	
-	private final String name;
+	private String name;
+	private WorldGenerator worldGenerator;
 	
-	public World(String name) {
+	public World(String name, WorldGenerator worldGenerator) {
 		this.name = name;
+		this.worldGenerator = worldGenerator;
 		
 		chunkManager = new ChunkManager(this);
+		player = new Player();
 	}
 	
-	public void update(int px, int pz) {
-		chunkManager.update(px, pz);
+	public void update() {
+		chunkManager.update();
 	}
 	
 	public void render() {
@@ -32,8 +38,24 @@ public class World {
 		return chunkManager;
 	}
 	
+	public Player getPlayer() {
+		return player;
+	}
+	
 	public String getName() {
 		return name;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public WorldGenerator getWorldGenerator() {
+		return worldGenerator;
+	}
+	
+	public void setWorldGenerator(WorldGenerator worldGenerator) {
+		this.worldGenerator = worldGenerator;
 	}
 	
 }

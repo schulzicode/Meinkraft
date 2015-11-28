@@ -35,7 +35,6 @@ public class Main {
 			Input.update();
 			glfwPollEvents();
 			mk.update();
-			
 			mk.render();
 			
 			glfwSwapBuffers(Display.getWindow());

@@ -35,12 +35,12 @@ public class Camera implements InputController {
 				Input.setMousePos(Display.getWidth() / 2, Display.getHeight() / 2);
 			} else {
 				if(!lockMov) {
-					Vector3 forward = new Vector3(getViewMatrix().get(2, 0), getViewMatrix().get(2, 1), getViewMatrix().get(2, 2));
+					Vector3 forward = getDirection();
 					Vector3 sideward = new Vector3(getViewMatrix().get(0, 0), getViewMatrix().get(0, 1), getViewMatrix().get(0, 2));
 					
 					float MOV_SPEED = Camera.MOV_SPEED;
 					if(Input.getKey(GLFW_KEY_LEFT_SHIFT))
-						MOV_SPEED *= 5;
+						MOV_SPEED *= 15;
 					
 					if(Input.getKey(GLFW_KEY_W))
 						transform.setTranslation(transform.getTranslation().add(forward.mul(MOV_SPEED * Time.getDelta())));
@@ -96,6 +96,10 @@ public class Camera implements InputController {
 		Matrix4 r = new Matrix4().initRotation(transform.getRotation(), Matrix4.YXZ);
 		
 		return r.mul(t);
+	}
+	
+	public Vector3 getDirection() {
+		return new Vector3(getViewMatrix().get(2, 0), getViewMatrix().get(2, 1), getViewMatrix().get(2, 2));
 	}
 	
 	public void lockMovement(boolean lock) {
